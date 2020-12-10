@@ -1,0 +1,806 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     33650,        798]
+NotebookOptionsPosition[     33143,        776]
+NotebookOutlinePosition[     33523,        792]
+CellTagsIndexPosition[     33480,        789]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Evolving", " ", "neutral", " ", "sites"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[Mu]", "=", 
+     RowBox[{"5", " ", 
+      SuperscriptBox["10", 
+       RowBox[{"-", "2"}]]}]}], ";", 
+    RowBox[{"(*", 
+     RowBox[{
+     "total", " ", "substitution", " ", "rate", " ", "per", " ", "site"}], 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"n", "=", "100"}], ";", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"population", " ", "size"}], " ", "=", " ", 
+      RowBox[{"total", " ", "number", " ", "of", " ", "sequences"}]}], "*)"}],
+     "\[IndentingNewLine]", 
+    RowBox[{"t0", "=", 
+     RowBox[{"10", "n"}]}], ";", 
+    RowBox[{"(*", 
+     RowBox[{
+     "initial", " ", "sample", " ", "timepoint", " ", "for", " ", "sampling", 
+      " ", "the", " ", "population"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"t", "=", 
+     SuperscriptBox["10", "2"]}], ";"}], " ", 
+   RowBox[{"(*", 
+    RowBox[{"observation", " ", "gap"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"L", "=", "100"}], ";"}], " ", 
+   RowBox[{"(*", 
+    RowBox[{"number", " ", "of", " ", "neutral", " ", "sites"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Mu]2", "=", 
+     SuperscriptBox["\[Mu]", "2"]}], ";", 
+    RowBox[{"(*", 
+     RowBox[{
+     "total", " ", "substitution", " ", "rate", " ", "per", " ", "one", " ", 
+      "compensatory", " ", "substitution"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"L2", "=", "50"}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "twice", " ", "the", " ", "number", " ", "of", " ", "epistatic", " ", 
+       "sites"}], ",", " ", 
+      RowBox[{
+       RowBox[{"e", ".", "g", ".", " ", "L2"}], "=", 
+       RowBox[{
+       "50", " ", "corresponds", " ", "to", " ", "having", " ", "100", " ", 
+        "joint", " ", "epistatic", " ", "sites"}]}]}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"loci", "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", "L"}], "]"}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "contains", " ", "a", " ", "list", " ", "of", " ", "all", " ", "sites", 
+       " ", "across", " ", "the", " ", "population", " ", "at", " ", "final", 
+       " ", "time", " ", "point", " ", "T"}], " ", "=", " ", 
+      RowBox[{"t", "+", 
+       RowBox[{"10", "n"}]}]}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"loci0", "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", "L"}], "]"}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "contains", " ", "a", " ", "list", " ", "of", " ", "all", " ", "sites", 
+       " ", "across", " ", "the", " ", "population", " ", "at", " ", "the", 
+       " ", "first", " ", "time", " ", "point", " ", "T"}], " ", "=", " ", 
+      RowBox[{"10", "n"}]}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"loci2", "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", "L2"}], "]"}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "contains", " ", "a", " ", "list", " ", "of", " ", "all", " ", "sites", 
+       " ", "across", " ", "the", " ", "population", " ", "at", " ", "final", 
+       " ", "time", " ", "point", " ", "T"}], " ", "=", " ", 
+      RowBox[{"t", "+", 
+       RowBox[{"10", "n"}]}]}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"loci20", "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", "L2"}], "]"}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "contains", " ", "a", " ", "list", " ", "of", " ", "all", " ", "sites", 
+       " ", "across", " ", "the", " ", "population", " ", "at", " ", "the", 
+       " ", "first", " ", "time", " ", "point", " ", "T"}], " ", "=", " ", 
+      RowBox[{"10", "n"}]}], "*)"}], 
+    RowBox[{"mutation", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"\[Mu]", "/", "3"}], ",", 
+         RowBox[{"\[Mu]", "/", "3"}], ",", 
+         RowBox[{"\[Mu]", "/", "3"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\[Mu]", "/", "3"}], ",", "0", ",", 
+         RowBox[{"\[Mu]", "/", "3"}], ",", 
+         RowBox[{"\[Mu]", "/", "3"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\[Mu]", "/", "3"}], ",", 
+         RowBox[{"\[Mu]", "/", "3"}], ",", "0", ",", 
+         RowBox[{"\[Mu]", "/", "3"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\[Mu]", "/", "3"}], ",", 
+         RowBox[{"\[Mu]", "/", "3"}], ",", 
+         RowBox[{"\[Mu]", "/", "3"}], ",", "0"}], "}"}]}], "}"}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{"Jukes", "-", 
+      RowBox[{
+      "Cantor", " ", "nucleotide", " ", "substitution", " ", "matrix"}]}], 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"j", "=", "1"}], ",", 
+      RowBox[{"j", "\[LessEqual]", "L"}], ",", 
+      RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"freqs", "=", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}]}], ";", " ", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"initial", " ", "frequency", " ", "of", " ", "nucleotides"}],
+          ",", " ", "A", ",", " ", "C", ",", " ", "G", ",", " ", 
+         RowBox[{"and", " ", "T"}], ",", " ", "respectively"}], "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "\[LessEqual]", 
+          RowBox[{"t", "+", 
+           RowBox[{"10", "n"}]}]}], ",", 
+         RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"freqs", "=", 
+           RowBox[{"freqs", "+", 
+            RowBox[{"mutation", ".", "freqs"}], "-", 
+            RowBox[{"\[Mu]", "*", "freqs"}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"freqs", "=", 
+           RowBox[{"Flatten", "[", 
+            RowBox[{
+             RowBox[{"RandomVariate", "[", 
+              RowBox[{
+               RowBox[{"MultinomialDistribution", "[", 
+                RowBox[{"n", ",", "freqs"}], "]"}], ",", "1"}], "]"}], "/", 
+             "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"i", "\[Equal]", 
+             RowBox[{"10", "n"}]}], ",", "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{"initial", " ", "time", " ", "point"}], "*)"}], 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"numbers0", "=", 
+              RowBox[{"Round", "[", 
+               RowBox[{"freqs", "*", "n"}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+              "ensure", " ", "integer", " ", "number", " ", "of", " ", 
+               "loci"}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"sequence0", "=", 
+              RowBox[{"ConstantArray", "[", 
+               RowBox[{"\"\<A\>\"", ",", "n"}], "]"}]}], ";", " ", 
+             RowBox[{"(*", 
+              RowBox[{
+              "create", " ", "the", " ", "ancestral", " ", "population", " ", 
+               "per", " ", 
+               RowBox[{"site", ":", " ", 
+                RowBox[{"All", " ", "As"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"position0", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{"i", ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], " ", 
+             ";", " ", 
+             RowBox[{"(*", 
+              RowBox[{"positions", " ", "in", " ", "the", " ", "population"}],
+               "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"positionC0", "=", 
+              RowBox[{"RandomSample", "[", 
+               RowBox[{"position0", ",", 
+                RowBox[{
+                "numbers0", "\[LeftDoubleBracket]", "2", 
+                 "\[RightDoubleBracket]"}]}], "]"}]}], " ", ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"sequence0", "=", 
+              RowBox[{"ReplacePart", "[", 
+               RowBox[{"sequence0", ",", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"Alternatives", "@@", "positionC0"}], ")"}], 
+                 "\[Rule]", "\"\<C\>\""}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{"A", "\[Rule]", "C"}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"position0", "=", 
+              RowBox[{"DeleteCases", "[", 
+               RowBox[{"position0", ",", 
+                RowBox[{"Alternatives", "@@", "positionC0"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+              "update", " ", "positions", " ", "after", " ", "sampling", " ", 
+               "Cs"}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"positionG0", "=", 
+              RowBox[{"RandomSample", "[", 
+               RowBox[{"position0", ",", 
+                RowBox[{
+                "numbers0", "\[LeftDoubleBracket]", "3", 
+                 "\[RightDoubleBracket]"}]}], "]"}]}], " ", ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"sequence0", "=", 
+              RowBox[{"ReplacePart", "[", 
+               RowBox[{"sequence0", ",", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"Alternatives", "@@", "positionC0"}], ")"}], 
+                 "\[Rule]", "\"\<G\>\""}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{"A", "\[Rule]", "G"}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"position0", "=", 
+              RowBox[{"DeleteCases", "[", 
+               RowBox[{"position0", ",", 
+                RowBox[{"Alternatives", "@@", "positionG0"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+              "update", " ", "positions", " ", "after", " ", "sampling", " ", 
+               "Gs"}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"positionT0", "=", 
+              RowBox[{"RandomSample", "[", 
+               RowBox[{"position0", ",", 
+                RowBox[{
+                "numbers0", "\[LeftDoubleBracket]", "4", 
+                 "\[RightDoubleBracket]"}]}], "]"}]}], ";", " ", 
+             "\[IndentingNewLine]", 
+             RowBox[{"sequence0", "=", 
+              RowBox[{"ReplacePart", "[", 
+               RowBox[{"sequence0", ",", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"Alternatives", "@@", "positionC0"}], ")"}], 
+                 "\[Rule]", "\"\<T\>\""}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{"A", "\[Rule]", "T"}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"position0", "=", 
+              RowBox[{"DeleteCases", "[", 
+               RowBox[{"position0", ",", 
+                RowBox[{"Alternatives", "@@", "positionT0"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+              "update", " ", "positions", " ", "after", " ", "sampling", " ", 
+               "Ts"}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"positionA0", "=", "position0"}], ";", " ", 
+             RowBox[{"(*", 
+              RowBox[{
+              "the", " ", "remaining", " ", "positions", " ", "are", " ", 
+               "all", " ", "As"}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Length", "[", "positionA0", "]"}], "+", 
+                 RowBox[{"Length", "[", "positionC0", "]"}], "+", 
+                 RowBox[{"Length", "[", "positionG0", "]"}], "+", 
+                 RowBox[{"Length", "[", "positionT0", "]"}]}], "\[Equal]", 
+                "n"}], ",", "True", ",", 
+               RowBox[{"Print", "[", "\"\<1\>\"", "]"}]}], "]"}], " ", ";", 
+             RowBox[{"(*", 
+              RowBox[{
+              "check", " ", "all", " ", "sites", " ", "have", " ", "been", 
+               " ", "sampled", " ", "correctly"}], "*)"}], 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"loci0", "[", 
+               RowBox[{"[", "j", "]"}], "]"}], "=", "sequence0"}], ";"}]}], 
+           "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "similar", " ", "steps", " ", "to", " ", "collect", " ", "sequences", 
+         " ", "at", " ", "the", " ", "final", " ", "time", " ", "point"}], 
+        "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"numbers", "=", 
+        RowBox[{"Round", "[", 
+         RowBox[{"freqs", "*", "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"sequence", "=", 
+        RowBox[{"ConstantArray", "[", 
+         RowBox[{"\"\<A\>\"", ",", "n"}], "]"}]}], ";", " ", 
+       "\[IndentingNewLine]", 
+       RowBox[{"position", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{"i", ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], " ", ";", " ",
+        "\[IndentingNewLine]", 
+       RowBox[{"positionC", "=", 
+        RowBox[{"RandomSample", "[", 
+         RowBox[{"position", ",", 
+          RowBox[{
+          "numbers", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}],
+          "]"}]}], " ", ";", "\[IndentingNewLine]", 
+       RowBox[{"sequence", "=", 
+        RowBox[{"ReplacePart", "[", 
+         RowBox[{"sequence", ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"Alternatives", "@@", "positionC"}], ")"}], "\[Rule]", 
+           "\"\<C\>\""}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"position", "=", 
+        RowBox[{"DeleteCases", "[", 
+         RowBox[{"position", ",", 
+          RowBox[{"Alternatives", "@@", "positionC"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"positionG", "=", 
+        RowBox[{"RandomSample", "[", 
+         RowBox[{"position", ",", 
+          RowBox[{
+          "numbers", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}]}],
+          "]"}]}], " ", ";", "\[IndentingNewLine]", 
+       RowBox[{"sequence", "=", 
+        RowBox[{"ReplacePart", "[", 
+         RowBox[{"sequence", ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"Alternatives", "@@", "positionC"}], ")"}], "\[Rule]", 
+           "\"\<G\>\""}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"position", "=", 
+        RowBox[{"DeleteCases", "[", 
+         RowBox[{"position", ",", 
+          RowBox[{"Alternatives", "@@", "positionG"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"positionT", "=", 
+        RowBox[{"RandomSample", "[", 
+         RowBox[{"position", ",", 
+          RowBox[{
+          "numbers", "\[LeftDoubleBracket]", "4", "\[RightDoubleBracket]"}]}],
+          "]"}]}], ";", " ", "\[IndentingNewLine]", 
+       RowBox[{"sequence", "=", 
+        RowBox[{"ReplacePart", "[", 
+         RowBox[{"sequence", ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"Alternatives", "@@", "positionC"}], ")"}], "\[Rule]", 
+           "\"\<T\>\""}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"position", "=", 
+        RowBox[{"DeleteCases", "[", 
+         RowBox[{"position", ",", 
+          RowBox[{"Alternatives", "@@", "positionT"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"positionA", "=", "position"}], ";", " ", 
+       "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"Length", "[", "positionA", "]"}], "+", 
+           RowBox[{"Length", "[", "positionC", "]"}], "+", 
+           RowBox[{"Length", "[", "positionG", "]"}], "+", 
+           RowBox[{"Length", "[", "positionT", "]"}]}], "\[Equal]", "n"}], 
+         ",", "True", ",", 
+         RowBox[{
+         "Print", "[", 
+          "\"\<Error: Number of nucleotides per site don't match the total \
+population size\>\"", "]"}]}], "]"}], " ", ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"loci", "[", 
+         RowBox[{"[", "j", "]"}], "]"}], "=", "sequence"}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Evolving", " ", "compensatory", " ", "double"}], "-", 
+     RowBox[{"mutant", " ", "sites"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"mutation", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"\[Mu]2", "/", "3"}], ",", 
+         RowBox[{"\[Mu]2", "/", "3"}], ",", 
+         RowBox[{"\[Mu]2", "/", "3"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\[Mu]2", "/", "3"}], ",", "0", ",", 
+         RowBox[{"\[Mu]2", "/", "3"}], ",", 
+         RowBox[{"\[Mu]2", "/", "3"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\[Mu]2", "/", "3"}], ",", 
+         RowBox[{"\[Mu]2", "/", "3"}], ",", "0", ",", 
+         RowBox[{"\[Mu]2", "/", "3"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\[Mu]2", "/", "3"}], ",", 
+         RowBox[{"\[Mu]2", "/", "3"}], ",", 
+         RowBox[{"\[Mu]2", "/", "3"}], ",", "0"}], "}"}]}], "}"}]}], ";"}], 
+   " ", 
+   RowBox[{"(*", 
+    RowBox[{"Jukes", "-", 
+     RowBox[{
+     "Cantor", " ", "nucleotide", " ", "substitution", " ", "matrix"}]}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"j", "=", "1"}], ",", 
+     RowBox[{"j", "\[LessEqual]", "L2"}], ",", 
+     RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"freqs", "=", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}]}], ";", " ", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"initial", " ", "frequency", " ", "of", " ", "pairs"}], ",", 
+        " ", "AA", ",", " ", "CC", ",", " ", "GG", ",", " ", 
+        RowBox[{"and", " ", "TT"}], ",", " ", "respectively"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", 
+        RowBox[{"i", "\[LessEqual]", 
+         RowBox[{"t", "+", 
+          RowBox[{"10", "n"}]}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"freqs", "=", 
+          RowBox[{"freqs", "+", 
+           RowBox[{"mutation", ".", "freqs"}], "-", 
+           RowBox[{"\[Mu]2", "*", "freqs"}]}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"freqs", "=", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{
+            RowBox[{"RandomVariate", "[", 
+             RowBox[{
+              RowBox[{"MultinomialDistribution", "[", 
+               RowBox[{"n", ",", "freqs"}], "]"}], ",", "1"}], "]"}], "/", 
+            "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"i", "\[Equal]", 
+            RowBox[{"10", "n"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{"initial", " ", "time", " ", "point"}], "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"numbers0", "=", 
+             RowBox[{"Round", "[", 
+              RowBox[{"freqs", "*", "n"}], "]"}]}], ";", 
+            RowBox[{"(*", 
+             RowBox[{
+             "ensure", " ", "integer", " ", "number", " ", "of", " ", 
+              "loci"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"sequence0", "=", 
+             RowBox[{"ConstantArray", "[", 
+              RowBox[{"\"\<AA\>\"", ",", "n"}], "]"}]}], ";", " ", 
+            RowBox[{"(*", 
+             RowBox[{
+             "create", " ", "the", " ", "ancestral", " ", "population", " ", 
+              "per", " ", 
+              RowBox[{"site", ":", " ", 
+               RowBox[{"All", " ", "As"}]}]}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"position0", "=", 
+             RowBox[{"Table", "[", 
+              RowBox[{"i", ",", 
+               RowBox[{"{", 
+                RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], " ", ";",
+             " ", 
+            RowBox[{"(*", 
+             RowBox[{"positions", " ", "in", " ", "the", " ", "population"}], 
+             "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"positionC0", "=", 
+             RowBox[{"RandomSample", "[", 
+              RowBox[{"position0", ",", 
+               RowBox[{
+               "numbers0", "\[LeftDoubleBracket]", "2", 
+                "\[RightDoubleBracket]"}]}], "]"}]}], " ", ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"sequence0", "=", 
+             RowBox[{"ReplacePart", "[", 
+              RowBox[{"sequence0", ",", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"Alternatives", "@@", "positionC0"}], ")"}], 
+                "\[Rule]", "\"\<CC\>\""}]}], "]"}]}], ";", 
+            RowBox[{"(*", 
+             RowBox[{"AA", "\[Rule]", "CC"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"position0", "=", 
+             RowBox[{"DeleteCases", "[", 
+              RowBox[{"position0", ",", 
+               RowBox[{"Alternatives", "@@", "positionC0"}]}], "]"}]}], ";", 
+            RowBox[{"(*", 
+             RowBox[{
+             "update", " ", "positions", " ", "after", " ", "sampling", " ", 
+              "Cs"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"positionG0", "=", 
+             RowBox[{"RandomSample", "[", 
+              RowBox[{"position0", ",", 
+               RowBox[{
+               "numbers0", "\[LeftDoubleBracket]", "3", 
+                "\[RightDoubleBracket]"}]}], "]"}]}], " ", ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"sequence0", "=", 
+             RowBox[{"ReplacePart", "[", 
+              RowBox[{"sequence0", ",", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"Alternatives", "@@", "positionC0"}], ")"}], 
+                "\[Rule]", "\"\<GG\>\""}]}], "]"}]}], ";", 
+            RowBox[{"(*", 
+             RowBox[{"AA", "\[Rule]", "GG"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"position0", "=", 
+             RowBox[{"DeleteCases", "[", 
+              RowBox[{"position0", ",", 
+               RowBox[{"Alternatives", "@@", "positionG0"}]}], "]"}]}], ";", 
+            RowBox[{"(*", 
+             RowBox[{
+             "update", " ", "positions", " ", "after", " ", "sampling", " ", 
+              "Gs"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"positionT0", "=", 
+             RowBox[{"RandomSample", "[", 
+              RowBox[{"position0", ",", 
+               RowBox[{
+               "numbers0", "\[LeftDoubleBracket]", "4", 
+                "\[RightDoubleBracket]"}]}], "]"}]}], ";", " ", 
+            "\[IndentingNewLine]", 
+            RowBox[{"sequence0", "=", 
+             RowBox[{"ReplacePart", "[", 
+              RowBox[{"sequence0", ",", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"Alternatives", "@@", "positionC0"}], ")"}], 
+                "\[Rule]", "\"\<TT\>\""}]}], "]"}]}], ";", 
+            RowBox[{"(*", 
+             RowBox[{"AA", "\[Rule]", "TT"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"position0", "=", 
+             RowBox[{"DeleteCases", "[", 
+              RowBox[{"position0", ",", 
+               RowBox[{"Alternatives", "@@", "positionT0"}]}], "]"}]}], ";", 
+            RowBox[{"(*", 
+             RowBox[{
+             "update", " ", "positions", " ", "after", " ", "sampling", " ", 
+              "Ts"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"positionA0", "=", "position0"}], ";", " ", 
+            RowBox[{"(*", 
+             RowBox[{
+             "the", " ", "remaining", " ", "positions", " ", "are", " ", 
+              "all", " ", "AAs"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"Length", "[", "positionA0", "]"}], "+", 
+                RowBox[{"Length", "[", "positionC0", "]"}], "+", 
+                RowBox[{"Length", "[", "positionG0", "]"}], "+", 
+                RowBox[{"Length", "[", "positionT0", "]"}]}], "\[Equal]", 
+               "n"}], ",", "True", ",", 
+              RowBox[{"Print", "[", "\"\<1\>\"", "]"}]}], "]"}], " ", ";", 
+            RowBox[{"(*", 
+             RowBox[{
+             "check", " ", "all", " ", "sites", " ", "have", " ", "been", " ",
+               "sampled", " ", "correctly"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"loci20", "[", 
+              RowBox[{"[", "j", "]"}], "]"}], "=", "sequence0"}], ";"}]}], 
+          "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "similar", " ", "steps", " ", "to", " ", "collect", " ", "sequences", 
+        " ", "at", " ", "the", " ", "final", " ", "time", " ", "point"}], 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"numbers", "=", 
+       RowBox[{"Round", "[", 
+        RowBox[{"freqs", "*", "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"sequence", "=", 
+       RowBox[{"ConstantArray", "[", 
+        RowBox[{"\"\<AA\>\"", ",", "n"}], "]"}]}], ";", " ", 
+      "\[IndentingNewLine]", 
+      RowBox[{"position", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"i", ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], " ", ";", " ", 
+      "\[IndentingNewLine]", 
+      RowBox[{"positionC", "=", 
+       RowBox[{"RandomSample", "[", 
+        RowBox[{"position", ",", 
+         RowBox[{
+         "numbers", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+        "]"}]}], " ", ";", "\[IndentingNewLine]", 
+      RowBox[{"sequence", "=", 
+       RowBox[{"ReplacePart", "[", 
+        RowBox[{"sequence", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"Alternatives", "@@", "positionC"}], ")"}], "\[Rule]", 
+          "\"\<CC\>\""}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"position", "=", 
+       RowBox[{"DeleteCases", "[", 
+        RowBox[{"position", ",", 
+         RowBox[{"Alternatives", "@@", "positionC"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"positionG", "=", 
+       RowBox[{"RandomSample", "[", 
+        RowBox[{"position", ",", 
+         RowBox[{
+         "numbers", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}]}], 
+        "]"}]}], " ", ";", "\[IndentingNewLine]", 
+      RowBox[{"sequence", "=", 
+       RowBox[{"ReplacePart", "[", 
+        RowBox[{"sequence", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"Alternatives", "@@", "positionC"}], ")"}], "\[Rule]", 
+          "\"\<GG\>\""}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"position", "=", 
+       RowBox[{"DeleteCases", "[", 
+        RowBox[{"position", ",", 
+         RowBox[{"Alternatives", "@@", "positionG"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"positionT", "=", 
+       RowBox[{"RandomSample", "[", 
+        RowBox[{"position", ",", 
+         RowBox[{
+         "numbers", "\[LeftDoubleBracket]", "4", "\[RightDoubleBracket]"}]}], 
+        "]"}]}], ";", " ", "\[IndentingNewLine]", 
+      RowBox[{"sequence", "=", 
+       RowBox[{"ReplacePart", "[", 
+        RowBox[{"sequence", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"Alternatives", "@@", "positionC"}], ")"}], "\[Rule]", 
+          "\"\<TT\>\""}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"position", "=", 
+       RowBox[{"DeleteCases", "[", 
+        RowBox[{"position", ",", 
+         RowBox[{"Alternatives", "@@", "positionT"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"positionA", "=", "position"}], ";", " ", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "positionA", "]"}], "+", 
+          RowBox[{"Length", "[", "positionC", "]"}], "+", 
+          RowBox[{"Length", "[", "positionG", "]"}], "+", 
+          RowBox[{"Length", "[", "positionT", "]"}]}], "\[Equal]", "n"}], ",",
+         "True", ",", 
+        RowBox[{
+        "Print", "[", 
+         "\"\<Error: Number of nucleotides per site don't match the total \
+population size\>\"", "]"}]}], "]"}], " ", ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"loci2", "[", 
+        RowBox[{"[", "j", "]"}], "]"}], "=", "sequence"}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.8162795570352*^9, 3.8162795611302457`*^9}, {
+   3.8162796336423707`*^9, 3.816279716433458*^9}, {3.8162797777394886`*^9, 
+   3.8162797868890095`*^9}, {3.816279835402258*^9, 3.8162798746971474`*^9}, {
+   3.8162799399137096`*^9, 3.8162799443289003`*^9}, {3.81627998473782*^9, 
+   3.8162799973849897`*^9}, {3.8162800865855064`*^9, 3.816280161177997*^9}, {
+   3.816280541748048*^9, 3.816280584104828*^9}, {3.816529352552187*^9, 
+   3.8165293711434546`*^9}, {3.8165309137369432`*^9, 
+   3.8165310827252007`*^9}, {3.816531913156025*^9, 3.81653204496599*^9}, {
+   3.8165321553018417`*^9, 3.816532180804624*^9}, {3.8165323531239667`*^9, 
+   3.8165323707408333`*^9}, {3.8165324322133408`*^9, 
+   3.8165325455269637`*^9}, {3.8165325877988844`*^9, 3.816532589285909*^9}, 
+   3.816532699588863*^9, {3.816533070982538*^9, 3.8165330726919656`*^9}, {
+   3.816533115716874*^9, 3.8165331627514086`*^9}, {3.816533218216365*^9, 
+   3.8165332205002575`*^9}, {3.816533667923745*^9, 3.8165336752341876`*^9}, {
+   3.8165337340219297`*^9, 3.816533736514266*^9}, {3.816533768128696*^9, 
+   3.8165338090914555`*^9}, 3.816533874067137*^9, {3.8165339157788534`*^9, 
+   3.8165339778448687`*^9}, {3.816534036821855*^9, 3.8165341445312047`*^9}, {
+   3.816534301796005*^9, 3.8165343174261928`*^9}, {3.816538597550826*^9, 
+   3.816538634460945*^9}, {3.816539410493614*^9, 3.81653941437922*^9}, {
+   3.816539631279121*^9, 3.81653971523019*^9}, {3.8165406059162855`*^9, 
+   3.8165407085577183`*^9}, {3.816540755937981*^9, 3.816540781036838*^9}, {
+   3.816541421629527*^9, 3.8165415441232033`*^9}, {3.8165420528432713`*^9, 
+   3.816542092027439*^9}, {3.8165421384602327`*^9, 3.8165422000607653`*^9}, {
+   3.816542286604899*^9, 3.8165423347311573`*^9}, {3.816544768296523*^9, 
+   3.81654477173632*^9}, {3.8165453830956383`*^9, 3.816545396521716*^9}, {
+   3.8165927152250695`*^9, 3.8165928306973763`*^9}, {3.816593266696057*^9, 
+   3.8165934012294083`*^9}, {3.8166122716659174`*^9, 
+   3.8166123277659454`*^9}, {3.81661239047084*^9, 3.816612403606723*^9}, {
+   3.8166133214776273`*^9, 3.8166133571133633`*^9}, {3.8166138460691004`*^9, 
+   3.8166138479251366`*^9}, {3.816615990180378*^9, 3.8166160080705504`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<MyDirectory\\\\initial_sample.txt\>\"", ",", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"StringJoin", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Map", "[", 
+        RowBox[{"StringJoin", ",", 
+         RowBox[{"Transpose", "[", "loci0", "]"}]}], "]"}], ",", 
+       RowBox[{"Map", "[", 
+        RowBox[{"StringJoin", ",", 
+         RowBox[{"Transpose", "[", "loci20", "]"}]}], "]"}]}], "}"}]}], 
+    "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8165387012685986`*^9, 3.816538745852339*^9}, 
+   3.816538782878292*^9, {3.8165452944690084`*^9, 3.816545309492221*^9}, 
+   3.81661423237048*^9, {3.8166160362432384`*^9, 3.8166160414732556`*^9}}],
+
+Cell[BoxData["\<\"C:\\\\Users\\\\ghafa\\\\Desktop\\\\University \
+related\\\\University of Oxford\\\\Wroks with \
+Aris\\\\Paper1\\\\initial_sample.txt\"\>"], "Output",
+ CellChangeTimes->{3.8165387899244432`*^9, 3.8165394251713514`*^9, 
+  3.816545313098941*^9, 3.816614243417946*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<MyDirectory\\\\final_sample.txt\>\"", ",", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"StringJoin", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Map", "[", 
+        RowBox[{"StringJoin", ",", 
+         RowBox[{"Transpose", "[", "loci", "]"}]}], "]"}], ",", 
+       RowBox[{"Map", "[", 
+        RowBox[{"StringJoin", ",", 
+         RowBox[{"Transpose", "[", "loci2", "]"}]}], "]"}]}], "}"}]}], 
+    "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8165453043087015`*^9, 3.816545304773489*^9}, {
+   3.816614235329567*^9, 3.8166142404169674`*^9}, 3.8166160625628757`*^9}],
+
+Cell[BoxData["\<\"C:\\\\Users\\\\ghafa\\\\Desktop\\\\University \
+related\\\\University of Oxford\\\\Wroks with \
+Aris\\\\Paper1\\\\final_sample.txt\"\>"], "Output",
+ CellChangeTimes->{3.8165453140519266`*^9, 3.8166142413035965`*^9}]
+}, Open  ]]
+},
+WindowSize->{1920, 997},
+WindowMargins->{{1912, Automatic}, {Automatic, -8}},
+Magnification:>1.4 Inherited,
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 30645, 702, 2732, "Input"],
+Cell[CellGroupData[{
+Cell[31228, 726, 709, 16, 43, "Input"],
+Cell[31940, 744, 282, 4, 43, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32259, 753, 632, 15, 43, "Input"],
+Cell[32894, 770, 233, 3, 43, "Output"]
+}, Open  ]]
+}
+]
+*)
+
