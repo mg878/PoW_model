@@ -8,9 +8,9 @@ M. Ghafari et al.: Prisoner of War dynamics explains the time-dependent pattern 
 `Evolve_sequences.nb`: Generating neutral and epistatic sites for the simulation analysis. 
 Output files are (1) initial_sample.txt (first snapshot from the population after 10N_e generations) (2) final_sample.txt (final snapshot from the population after 10N_e + T* generations where T* is the time window of rate measurement)
 
-`neutral.nb`: Extracting and plotting the inferred root heights and clock rates from `Evolve_sequences.nb` for the purely neutral scenario, i.e. no epistatic sites. 
+`neutral.nb`: Extracting and plotting the inferred root heights and clock rates from BEAST log file for the purely neutral scenario, i.e. no epistatic sites. 
 
-`epistatic.nb`: Extracting and plotting the inferred root heights and clock rates from `Evolve_sequences.nb` for the epistatic scenario.
+`epistatic.nb`: Extracting and plotting the inferred root heights and clock rates from BEAST log file for the epistatic scenario.
 
 *stats* folder includes the log files from BEAST 1.10 parameter inference, along with the inferred mean and median clock rates.
 The files in this folder are named in the following format: `*_mA_B` letter A varies from 2 to 5 and corresponds to substitution rates ranging from 3x10^-2 to 3x10^-5 and letter B takes the values correspodning to the time window of observation, i.e. T*=10, 100, 1000, 10000, 100000, 1000000, 10000000
