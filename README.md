@@ -25,6 +25,6 @@ The files in this folder are named in the following format: `*_mA_B` letter A va
 
 `HCV_JC69_*.txt`: Contains the inferred MCC distance tree, XML and log files for the HCV samples using the JC69 substitution model.
 
-`HCV_GTR_*.txt`: Contains the inferred MCC time tree and log file for the HCV samples using the GTR+G4 substitution model.
+`HCV_GTR_*.txt`: Contains the inferred MCC time tree, XML and log file for the HCV samples using the GTR+G4 substitution model.
 
 `HCV_alignments.FST`: Contains the HCV alignments.
