@@ -19,12 +19,12 @@ The files in this folder are named in the following format: `*_mA_B` letter A va
 
 `sarbeco_ultimate_*.txt`: The PoW-transformed branch lengths for the Maximum Clade Credibility (MCC) time tree corresponding to * = median, lower, and upper quantile Sarbecovirus substitution rate estimates
 
-`sarbeco_JC69_*.txt`: Contains the inferred MCC distance tree, XML and log files using for the Sarbecovirus samples using the Jukes-Cantor (JC69) substitution model.
+`sarbeco_JC69_*.txt`: Contains the inferred MCC distance tree, XML and log files for the Sarbecovirus samples using the Jukes-Cantor (JC69) substitution model.
 
 `HCV_ultimate_*.txt`: The PoW-transformed branch lengths for the maximum clade credibility tree corresponding to * = median, lower, and upper quantile HCV substitution rate estimates
 
-`HCV_JC69_*.txt`: Contains the inferred MCC distance tree, XML and log files using for the HCV samples using the JC69 substitution model.
+`HCV_JC69_*.txt`: Contains the inferred MCC distance tree, XML and log files for the HCV samples using the JC69 substitution model.
 
-`HCV_GTR_*.txt`: Contains the inferred MCC time tree and log file using for the HCV samples using the GTR+G4 substitution model.
+`HCV_GTR_*.txt`: Contains the inferred MCC time tree and log file for the HCV samples using the GTR+G4 substitution model.
 
 `HCV_alignments.FST`: Contains the HCV alignments.
