@@ -23,7 +23,11 @@ The files in this folder are named in the following format: `*_mA_B` letter A va
 
 `*_logfile.log`: Contains the output log files of BEAST for * = FV, HCV, and sarbecovirus datasets.
 
+<<<<<<< HEAD
 `*_PoWtransformed.tree`: Contains the PoW-transformed maximum clade credibility tree for * = FV, HCV, and sarbecovirus datasets. Note that the information about transformed node heights are only stored in 'height_median' and 'height_.95_HPD' labels. The rest of the labels show inferred parameters in units of substitutions.
+=======
+`*_PoWtransformed.tree`: Contains the PoW-transformed maximum clade credibility tree for * = FV, HCV, and sarbecovirus datasets. 
+>>>>>>> main
 
 `HCV_GTR_*.txt`: Contains the inferred MCC time tree, XML and log file for the HCV samples using the GTR+G4 substitution model.
 
