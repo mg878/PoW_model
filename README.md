@@ -1,6 +1,6 @@
 # PoW_model
 
-M. Ghafari et al.: Prisoner of War dynamics explains the time-dependent pattern of substitution rates in viruses
+M. Ghafari et al.: A mechanistic evolutionary model explains the time-dependent pattern of substitution rates in viruses
 
 
 ## Codes
@@ -12,18 +12,18 @@ Output files are (1) initial_sample.txt (first snapshot from the population afte
 
 `epistatic.nb`: Extracts and plots the inferred root heights and clock rates from BEAST log file for the epistatic scenario.
 
+`PoW_ultrametric.R`: This is the code to generate PoW-transformed trees from the maximum clade credibility distance trees for FV, HCV, and sarbecovirus datasets.
+
 ***stats*** folder includes the log files for parameter inference, along with the inferred mean and median clock rates using BEAST.
 The files in this folder are named in the following format: `*_mA_B` letter A varies from 2 to 5 and corresponds to substitution rates ranging from 3x10^-2 to 3x10^-5 and letter B takes the values corresponding to the time window of observation, i.e. T=10, 100, 1000, 10000, 100000, 1000000, 10000000
 
-## Nexus
+## Output
 
-`sarbeco_ultimate_*.txt`: The PoW-transformed branch lengths for the Maximum Clade Credibility (MCC) time tree corresponding to * = median, lower, and upper quantile Sarbecovirus substitution rate estimates
+`*_MCC_distance.tree`: Contains the inferred maximum clade credibility tree for * = FV, HCV, and sarbecovirus datasets.
 
-`sarbeco_JC69_*.txt`: Contains the inferred MCC distance tree, XML and log files for the Sarbecovirus samples using the Jukes-Cantor (JC69) substitution model.
+`*_logfile.log`: Contains the output log files of BEAST for * = FV, HCV, and sarbecovirus datasets.
 
-`HCV_ultimate_*.txt`: The PoW-transformed branch lengths for the maximum clade credibility tree corresponding to * = median, lower, and upper quantile HCV substitution rate estimates
-
-`HCV_JC69_*.txt`: Contains the inferred MCC distance tree, XML and log files for the HCV samples using the JC69 substitution model.
+`*_PoWtransformed.tree`: Contains the PoW-transformed maximum clade credibility tree for * = FV, HCV, and sarbecovirus datasets. 
 
 `HCV_GTR_*.txt`: Contains the inferred MCC time tree, XML and log file for the HCV samples using the GTR+G4 substitution model.
 
