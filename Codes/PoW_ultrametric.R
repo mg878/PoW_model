@@ -9,13 +9,7 @@ require(tidytree)
 ##########################################
 
 #include the path directory to your tree file here: path/to/directory/filename.tree
-directory <- "C:/Users/ghafa/Desktop/University related/University of Oxford/Wroks with Aris/Paper1/MCC_HCV_ultrametric_test.(subst).trees.txt"
-
-#uncomment below if you are analysing a virus sample that belong to Baltimore group
-#MCC_Foamy_PoW_test.(subst).trees.txt"
-#MCC_HCV_PoW.trees.txt"
-#MCC_Sarbeco_ultrametric_test.(subst).trees.txt"
-
+directory <- "path/to/directory/filename.tree"
 d <- read.beast(directory)
 t <- as_tibble(d)
 
@@ -23,10 +17,15 @@ t <- as_tibble(d)
 #ggtree(d) + geom_text(aes(label=node), hjust=-.3) 
 
 ###uncomment below to set the PoW parameters for HCV
-muMax = 3.98*10**(-2)
-meanRate = 1.2*10**(-3)
+#muMax = 3.98*10**(-2)
+#meanRate = 1.2*10**(-3)
 
+###uncomment below to set the PoW parameters for sarbecovirus
+#muMax = 3.98*10**(-2)
 #meanRate = 5.5*10**(-4)
+
+###uncomment below to set the PoW parameters for sarbecovirus
+#muMax = 4.0*10**(-2)
 #meanRate = 6.11*10**(-6)
 
 delta = 0.2
