@@ -1,6 +1,6 @@
 # PoW_model
 
-M. Ghafari et al.: A mechanistic evolutionary model explains the time-dependent pattern of substitution rates in viruses
+Ghafari et al.: A mechanistic evolutionary model explains the time-dependent pattern of substitution rates in viruses
 
 
 ## Codes
@@ -19,11 +19,11 @@ The files in this folder are named in the following format: `*_mA_B` letter A va
 
 ## Output
 
-`*_MCC_distance.tree`: Contains the inferred maximum clade credibility tree for * = FV, HCV, and sarbecovirus datasets.
+`*_&_%_distance.trees`: Contains the inferred trees produced by BEAST (v 1.10.4) for * = FV, HCV, and sarbecovirus datasets using & = JC69 or HKY85 substitution models. This includes % = fixedRate or variedRate whereby the short-term rate and fastest-evolving rate groups are either fixed or varied.
 
-`*_logfile.log`: Contains the output log files of BEAST for * = FV, HCV, and sarbecovirus datasets.
+`*_&_%_PoWtransformed.trees`: Contains the PoW-transformed trees (produced by our R package).
 
-`*_PoWtransformed.tree`: Contains the PoW-transformed maximum clade credibility tree for * = FV, HCV, and sarbecovirus datasets. Note that the information about transformed node heights are only stored in 'height_median' and 'height_.95_HPD' labels. The rest of the labels show inferred parameters in units of substitutions.
+`*_logfile.log`: Contains output log files produced by BEAST for * = HCV and sarbecovirus heterochronous datasets (i.e., standard substitution models used to infer the short-term substitution rates).
 
 `HCV_GTR_*.txt`: Contains the inferred MCC time tree, XML and log file for the HCV samples using the GTR+G4 substitution model.
 
