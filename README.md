@@ -19,9 +19,7 @@ The files in this folder are named in the following format: `*_mA_B` letter A va
 
 ## Outputs
 
-`*_&_distance.trees`: Contains the sampled distance trees produced by BEAST (v 1.10.4) for * = FV, HCV, and sarbecovirus datasets using & = JC69 or HKY85 substitution models. 
-
-`*_&_%_PoWtransformed.trees`: Contains the PoW-transformed trees (produced by PoW_model_fixedRate.R or PoW_model_variedRate). This includes % = fixedRate or variedRate whereby the short-term rate and fastest-evolving rate groups are either fixed or varied.
+`*_&_%_PoWtransformed.trees`: Contains the PoW-transformed trees (produced by PoW_model_fixedRate.R or PoW_model_variedRate) for * = FV, HCV, and sarbecovirus datasets using & = JC69 or HKY85 substitution models. This includes % = fixedRate or variedRate whereby the short-term rate and fastest-evolving rate groups are either fixed or varied.
 
 `*.log`: Contains output log files produced by BEAST for * = HCV and sarbecovirus heterochronous datasets (i.e., standard substitution models used to infer the short-term substitution rate, equilibrium base frequencies, and transition/transversion ratio).
 
