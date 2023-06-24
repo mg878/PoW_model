@@ -1,6 +1,6 @@
 # PoW_model
 
-Ghafari et al.: A mechanistic evolutionary model explains the time-dependent pattern of substitution rates in viruses
+Ghafari et al.: A mechanistic evolutionary model explains the time-dependent pattern of substitution rates in viruses (https://www.sciencedirect.com/science/article/pii/S0960982221011246).
 
 
 ## Codes
