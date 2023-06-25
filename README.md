@@ -11,6 +11,13 @@ The Prisoner of War (PoW) model is written in R, allows for the reconstruction o
 
 PoW model requires the posterior rate distribution from dated sequences in the dataset. It also requires an ultrametric distance tree of all sequences in the dataset using a standard HKY substitution model (with no assumed rate heterogenity) along with the posterior distributions of the base frequencies and transition-transverstion rate. All output files should be compatible with the BEAST 1 format. 
 
+* `*.log` includes the posterior rate distribution (meanRate column in the log file)
+
+* `*.log` includes the posterior base frequencies and transition-transversion rate distributions (frequencies1-4 and kappa columns in the log file)
+
+* `*.trees` includes the posterior ultrametric distance trees 
+
+
 PoW model is compatible with R version 4.0.0 or higher and is tested on 4.0.4 to 4.2.1.  It depends on several libraries:
 
 * ape
@@ -19,5 +26,8 @@ PoW model is compatible with R version 4.0.0 or higher and is tested on 4.0.4 to
 
 * stringr
 
-### 
+### Developer info
 
+  - Copyright and License: Mahan Ghafari, MIT Licence
+  - Reference:
+    * [A mechanistic evolutionary model explains the time-dependent pattern of substitution rates in viruses](https://doi.org/10.1016/j.cub.2021.08.020) by Mahan Ghafari, Peter Simmonds, Oliver G Pybus, and Aris Katzourakis. Current Biology (2021).
