@@ -6,12 +6,12 @@ library("nleqslv")
 
 #######
 #Insert path to log file for the inferred short-term substitution rate (*.log output file from BEAST v1.10.4)
-filepath_rates <- "/Path/to/directory/*"
+filepath_rates <- "/Path/to/directory/*.log"
 
 #Insert path to the ultrametric distance trees (*.trees output file from BEAST v1.10.4) 
 #and log file for the standard HKY substitution model used to construct the ultrametric distance trees  
-filepath_distances <- "/Path/to/directory/*"
-filepath_HKYsubstitutionModel <- "/Path/to/directory/*"
+filepath_distances <- "/Path/to/directory/*.trees"
+filepath_HKYsubstitutionModel <- "/Path/to/directory/*.log"
 
 #######
 
