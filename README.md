@@ -26,10 +26,10 @@ PoW model is compatible with R version 4.0.0 or higher and is tested on 4.0.4 to
 
 * stringr
 
-#### Guide
+### Guide
 
 Ensure all required libraries are installed and the prerequisited files are available on your local directory.
-In the `PoW_mode.R`, set all the file paths to the right directories where the prerequisited  files are located. Line numbers which require the user to insert the directories are: #9, #13, #14, #95, #98, and #199.
+Ensure that in the `PoW_mode.R`, set all the paths to the corresponding directories where the prerequisited files are located -- these can be found in the script lines #9, #13, #14, #95, #98, and #199.
 
 ### Developer info
 
