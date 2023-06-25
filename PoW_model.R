@@ -1,4 +1,4 @@
-###Loading packages required for the PoW model
+###Loading libraries required for the PoW model
 library("stringr")
 library("ape")
 library("nleqslv")
