@@ -1,4 +1,4 @@
-# PoW_model
+# Paper
 
 M Ghafari, P Simmonds, OG Pybus, A Katzourakis - Current Biology, 2021. A mechanistic evolutionary model explains the time-dependent pattern of substitution rates in viruses (https://doi.org/10.1016/j.cub.2021.08.020).
 
