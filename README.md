@@ -3,7 +3,7 @@
 
 ### Overview
 
-The Prisoner of War (PoW) model is written in R, allows for the reconstruction of time trees over deep timescales, and is based on a mechanistic evolutionary model that explains the time-dependent changes in the evolutionary rate estimates of viruses over time.
+The Prisoner of War (PoW) model is written in R, allows for the reconstruction of virus time trees over deep timescales, and is based on a mechanistic evolutionary model that explains the time-dependent changes in the evolutionary rate estimates of viruses.
 
 ![Prisoner of War model](https://github.com/mg878/PoW_model/blob/main/PoW_sigmoid_TDRP.jpeg)
 
