@@ -83,9 +83,7 @@ for(i in 1:length(con2)){
 }
 
 #tree_list includes a list of constructed distance trees from BEAST, removing the first 10% as burn-in
-tree_list <- con2[c(1:(length(con2)-1))] 
-temp <- which(str_detect(tree_list, ";"))[6]
-tree_list <- con2[c(temp+1:(length(con2)-1))] 
+tree_list <- con2[c(i:(length(con2)-1))] 
 tree_list <- tree_list[c((round(length(tree_list)/10)+1):length(tree_list))]
 sampled_trees <- sample(tree_list,sample_size)
 
