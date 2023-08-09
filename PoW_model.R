@@ -89,7 +89,7 @@ sampled_trees <- sample(tree_list,sample_size)
 
 #create a new tree file based on the subsampling in the previous step
 #Insert the directory you would like <sampled_trees.trees> to be exported
-recreated_treefile <- c(con2[c(1:temp)],sampled_trees,'End;')
+recreated_treefile <- c(con2[c(1:(i-1))],sampled_trees,'End;')
 write.table(recreated_treefile, "/Path/to/directory/sampled_trees.trees", sep = "\n", quote = FALSE, row.names = FALSE)
 
 #import <sampled_trees.trees> created in the previous step from the directory
